@@ -24,7 +24,7 @@ function gererOptions(event) {
 
 // Fonction pour supprimer un joueur
 function supprimerJoueur() {
-    document.getElementById("suppJoueur").addEventListener('click', (e) => {
+    document.getElementById("suppJoueur")?.addEventListener('click', (e) => {
         e.preventDefault();
         const elementParent = e.target.closest('.joueurs');
         if (elementParent) {
@@ -35,7 +35,7 @@ function supprimerJoueur() {
 
 // Fonction pour modifier le nom d'un joueur
 function modifierNom() {
-    document.getElementById("RenommerJoueur").addEventListener('click', (e) => {
+    document.getElementById("RenommerJoueur")?.addEventListener('click', (e) => {
         e.preventDefault();
         let newNom = prompt("Ajoute le nom du joueur :)");
         if (newNom) {
@@ -60,7 +60,7 @@ function reaffecterBoutons() {
     });
 }
 
-// Calculatrice pour ajouter un nombre
+// Fonction pour ajouter un chiffre au score
 function ajouterChiffre(event) {
     event.preventDefault(); // Empêche le comportement par défaut du formulaire
     let joueurConcerne = event.target.closest('.joueurs');
@@ -68,9 +68,8 @@ function ajouterChiffre(event) {
     let scoreFinal = joueurConcerne.querySelector('.totalScore');
 
     let nombreInscrit = parseInt(inputNombre.value, 10);
-    if (isNaN(nombreInscrit) || nombreInscrit === '') {
-        alert("Veuillez entrer un nombre valide.");
-        return; // Sortir de la fonction si l'entrée n'est pas un nombre
+    if (isNaN(nombreInscrit)) {
+        nombreInscrit = 0; // Défaut à 0 si l'entrée n'est pas un nombre valide
     }
 
     let score = parseInt(scoreFinal.textContent, 10);
@@ -79,7 +78,7 @@ function ajouterChiffre(event) {
     inputNombre.value = '';
 }
 
-// Calculatrice pour soustraire un nombre
+// Fonction pour soustraire un chiffre du score
 function soustraireChiffre(event) {
     event.preventDefault(); // Empêche le comportement par défaut du formulaire
     let joueurConcerne = event.target.closest('.joueurs');
@@ -87,9 +86,8 @@ function soustraireChiffre(event) {
     let scoreFinal = joueurConcerne.querySelector('.totalScore');
 
     let nombreInscrit = parseInt(inputNombre.value, 10);
-    if (isNaN(nombreInscrit) || nombreInscrit === '') {
-        alert("Veuillez entrer un nombre valide.");
-        return; // Sortir de la fonction si l'entrée n'est pas un nombre
+    if (isNaN(nombreInscrit)) {
+        nombreInscrit = 0; // Défaut à 0 si l'entrée n'est pas un nombre valide
     }
 
     let score = parseInt(scoreFinal.textContent, 10);
@@ -101,7 +99,7 @@ function soustraireChiffre(event) {
     inputNombre.value = '';
 }
 
-// Ajouter un joueur
+// Fonction pour ajouter un joueur
 function ajoutJoueur(e) {
     e.preventDefault();
     let joueurs = document.querySelectorAll(".joueurs");
@@ -140,8 +138,8 @@ function ajoutJoueur(e) {
 }
 
 // Attacher les événements initiaux
-document.getElementById("boutonAjoutJoueur").addEventListener('click', ajoutJoueur);
-document.getElementById("boutonReset").addEventListener('click', (e) => {
+document.getElementById("boutonAjoutJoueur")?.addEventListener('click', ajoutJoueur);
+document.getElementById("boutonReset")?.addEventListener('click', (e) => {
     e.preventDefault();
     document.querySelectorAll('.totalScore').forEach(score => {
         score.textContent = "000";
