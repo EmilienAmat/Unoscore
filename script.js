@@ -117,7 +117,7 @@ function ajoutJoueur(e) {
     const joueurHTML = `
         <a href="#"><img src="settingLogo.png" class="settingLogo" alt=""></a>
         <p class="NomsJoueurs">Nom Joueur ${nouveauJoueur}</p>
-        <form action="#">
+        <form action="#" class="formJoueur">
             <label for="scoreInput"></label>
             <input class="Input" type="number" placeholder="ici">
         </form>
@@ -138,6 +138,7 @@ function ajoutJoueur(e) {
     document.querySelectorAll(".LogoSub").forEach(button => {
         button.addEventListener('click', soustraireChiffre);
     });
+    ajouterGestionToucheEntrer(); // Ajoute la gestion de la touche "Entrée" aux nouveaux formulaires
 }
 
 // Fonction pour empêcher l'envoi du formulaire avec la touche "Entrée"
@@ -150,7 +151,7 @@ function desactiverToucheEntrer(event) {
 
 // Ajouter la gestion de la touche "Entrée" à tous les formulaires de score
 function ajouterGestionToucheEntrer() {
-    document.querySelectorAll('form').forEach(form => {
+    document.querySelectorAll('form.formJoueur').forEach(form => {
         form.addEventListener('keydown', desactiverToucheEntrer);
     });
 }
@@ -174,5 +175,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll(".LogoSub").forEach(button => {
         button.addEventListener('click', soustraireChiffre);
     });
-    ajouterGestionToucheEntrer(); // Ajoute la gestion de la touche "Entrée"
+    ajouterGestionToucheEntrer(); // Ajoute la gestion de la touche "Entrée" aux formulaires existants
 });
