@@ -13,6 +13,7 @@ const optionLogo = `
 // Fonction pour gérer les clics sur les boutons "Supprimer" et "Renommer"
 function gererOptions(event) {
     event.preventDefault();
+    event.stopPropagation(); // Ajouter cette ligne
     const bouton = event.target;
     if (bouton.classList.contains('settingLogo')) {
         bouton.insertAdjacentHTML('beforebegin', optionsHTML);
@@ -24,8 +25,9 @@ function gererOptions(event) {
 
 // Fonction pour supprimer un joueur
 function supprimerJoueur() {
-    document.getElementById("suppJoueur")?.addEventListener('click', (e) => {
+    document.getElementById("suppJoueur").addEventListener('click', (e) => {
         e.preventDefault();
+        e.stopPropagation(); // Ajouter cette ligne
         const elementParent = e.target.closest('.joueurs');
         if (elementParent) {
             elementParent.remove();
@@ -35,8 +37,9 @@ function supprimerJoueur() {
 
 // Fonction pour modifier le nom d'un joueur
 function modifierNom() {
-    document.getElementById("RenommerJoueur")?.addEventListener('click', (e) => {
+    document.getElementById("RenommerJoueur").addEventListener('click', (e) => {
         e.preventDefault();
+        e.stopPropagation(); // Ajouter cette ligne
         let newNom = prompt("Ajoute le nom du joueur :)");
         if (newNom) {
             const listOption = document.querySelector('.settingList');
@@ -60,16 +63,18 @@ function reaffecterBoutons() {
     });
 }
 
-// Fonction pour ajouter un chiffre au score
+// Calculatrice pour ajouter un nombre
 function ajouterChiffre(event) {
-    event.preventDefault(); // Empêche le comportement par défaut du formulaire
+    event.preventDefault();
+    event.stopPropagation(); // Ajouter cette ligne
     let joueurConcerne = event.target.closest('.joueurs');
     let inputNombre = joueurConcerne.querySelector('.Input');
     let scoreFinal = joueurConcerne.querySelector('.totalScore');
 
     let nombreInscrit = parseInt(inputNombre.value, 10);
-    if (isNaN(nombreInscrit)) {
-        nombreInscrit = 0; // Défaut à 0 si l'entrée n'est pas un nombre valide
+    if (isNaN(nombreInscrit) || nombreInscrit === '') {
+        alert("Veuillez entrer un nombre valide.");
+        return; // Sortir de la fonction si l'entrée n'est pas un nombre
     }
 
     let score = parseInt(scoreFinal.textContent, 10);
@@ -78,16 +83,18 @@ function ajouterChiffre(event) {
     inputNombre.value = '';
 }
 
-// Fonction pour soustraire un chiffre du score
+// Calculatrice pour soustraire un nombre
 function soustraireChiffre(event) {
-    event.preventDefault(); // Empêche le comportement par défaut du formulaire
+    event.preventDefault();
+    event.stopPropagation(); // Ajouter cette ligne
     let joueurConcerne = event.target.closest('.joueurs');
     let inputNombre = joueurConcerne.querySelector('.Input');
     let scoreFinal = joueurConcerne.querySelector('.totalScore');
 
     let nombreInscrit = parseInt(inputNombre.value, 10);
-    if (isNaN(nombreInscrit)) {
-        nombreInscrit = 0; // Défaut à 0 si l'entrée n'est pas un nombre valide
+    if (isNaN(nombreInscrit) || nombreInscrit === '') {
+        alert("Veuillez entrer un nombre valide.");
+        return; // Sortir de la fonction si l'entrée n'est pas un nombre
     }
 
     let score = parseInt(scoreFinal.textContent, 10);
@@ -99,9 +106,10 @@ function soustraireChiffre(event) {
     inputNombre.value = '';
 }
 
-// Fonction pour ajouter un joueur
+// Ajouter un joueur
 function ajoutJoueur(e) {
     e.preventDefault();
+    e.stopPropagation(); // Ajouter cette ligne
     let joueurs = document.querySelectorAll(".joueurs");
     let nouveauJoueur = joueurs.length + 1;
     let elementParent = document.getElementById("bodyScore");
@@ -123,24 +131,35 @@ function ajoutJoueur(e) {
     noeudHTML.innerHTML = joueurHTML;
     elementParent.appendChild(noeudHTML);
 
-    // Réaffecter les gestionnaires de boutons et d'événements pour les nouveaux éléments
     reaffecterBoutons();
-    noeudHTML.querySelector(".LogoAdd").addEventListener('click', ajouterChiffre);
-    noeudHTML.querySelector(".LogoSub").addEventListener('click', soustraireChiffre);
+    document.querySelectorAll(".LogoAdd").forEach(button => {
+        button.addEventListener('click', ajouterChiffre);
+    });
+    document.querySelectorAll(".LogoSub").forEach(button => {
+        button.addEventListener('click', soustraireChiffre);
+    });
+}
 
-    // Ajouter un événement pour l'input de chaque nouveau joueur
-    noeudHTML.querySelector('.Input').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault(); // Empêche la soumission du formulaire
-            ajouterChiffre(e);
-        }
+// Fonction pour empêcher l'envoi du formulaire avec la touche "Entrée"
+function desactiverToucheEntrer(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Empêcher l'action par défaut de la touche "Entrée"
+        event.stopPropagation(); // Ajouter cette ligne
+    }
+}
+
+// Ajouter la gestion de la touche "Entrée" à tous les formulaires de score
+function ajouterGestionToucheEntrer() {
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('keydown', desactiverToucheEntrer);
     });
 }
 
 // Attacher les événements initiaux
-document.getElementById("boutonAjoutJoueur")?.addEventListener('click', ajoutJoueur);
-document.getElementById("boutonReset")?.addEventListener('click', (e) => {
+document.getElementById("boutonAjoutJoueur").addEventListener('click', ajoutJoueur);
+document.getElementById("boutonReset").addEventListener('click', (e) => {
     e.preventDefault();
+    e.stopPropagation(); // Ajouter cette ligne
     document.querySelectorAll('.totalScore').forEach(score => {
         score.textContent = "000";
     });
@@ -155,14 +174,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll(".LogoSub").forEach(button => {
         button.addEventListener('click', soustraireChiffre);
     });
-
-    // Ajouter l'événement pour les champs de saisie existants
-    document.querySelectorAll('.Input').forEach(input => {
-        input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault(); // Empêche la soumission du formulaire
-                ajouterChiffre(e);
-            }
-        });
-    });
+    ajouterGestionToucheEntrer(); // Ajoute la gestion de la touche "Entrée"
 });
