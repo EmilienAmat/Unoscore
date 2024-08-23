@@ -62,7 +62,7 @@ function reaffecterBoutons() {
 
 // Calculatrice pour ajouter un nombre
 function ajouterChiffre(event) {
-    event.preventDefault();
+    event.preventDefault(); // Empêche le comportement par défaut du formulaire
     let joueurConcerne = event.target.closest('.joueurs');
     let inputNombre = joueurConcerne.querySelector('.Input');
     let scoreFinal = joueurConcerne.querySelector('.totalScore');
@@ -81,7 +81,7 @@ function ajouterChiffre(event) {
 
 // Calculatrice pour soustraire un nombre
 function soustraireChiffre(event) {
-    event.preventDefault();
+    event.preventDefault(); // Empêche le comportement par défaut du formulaire
     let joueurConcerne = event.target.closest('.joueurs');
     let inputNombre = joueurConcerne.querySelector('.Input');
     let scoreFinal = joueurConcerne.querySelector('.totalScore');
@@ -125,26 +125,17 @@ function ajoutJoueur(e) {
     noeudHTML.innerHTML = joueurHTML;
     elementParent.appendChild(noeudHTML);
 
+    // Réaffecter les gestionnaires de boutons et d'événements pour les nouveaux éléments
     reaffecterBoutons();
-    document.querySelectorAll(".LogoAdd").forEach(button => {
-        button.addEventListener('click', ajouterChiffre);
-    });
-    document.querySelectorAll(".LogoSub").forEach(button => {
-        button.addEventListener('click', soustraireChiffre);
-    });
-}
+    noeudHTML.querySelector(".LogoAdd").addEventListener('click', ajouterChiffre);
+    noeudHTML.querySelector(".LogoSub").addEventListener('click', soustraireChiffre);
 
-// Fonction pour empêcher l'envoi du formulaire avec la touche "Entrée"
-function desactiverToucheEntrer(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault(); // Empêcher l'action par défaut de la touche "Entrée"
-    }
-}
-
-// Ajouter la gestion de la touche "Entrée" à tous les formulaires de score
-function ajouterGestionToucheEntrer() {
-    document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('keydown', desactiverToucheEntrer);
+    // Ajouter un événement pour l'input de chaque nouveau joueur
+    noeudHTML.querySelector('.Input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Empêche la soumission du formulaire
+            ajouterChiffre(e);
+        }
     });
 }
 
@@ -166,5 +157,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll(".LogoSub").forEach(button => {
         button.addEventListener('click', soustraireChiffre);
     });
-    ajouterGestionToucheEntrer(); // Ajoute la gestion de la touche "Entrée"
+
+    // Ajouter l'événement pour les champs de saisie existants
+    document.querySelectorAll('.Input').forEach(input => {
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Empêche la soumission du formulaire
+                ajouterChiffre(e);
+            }
+        });
+    });
 });
