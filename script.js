@@ -156,6 +156,11 @@ function ajouterGestionToucheEntrer() {
     });
 }
 
+// Initialiser la gestion des formulaires de base
+function initialiserFormulairesExistants() {
+    ajouterGestionToucheEntrer(); // Ajoute la gestion de la touche "Entrée" aux formulaires existants
+}
+
 // Attacher les événements initiaux
 document.getElementById("boutonAjoutJoueur").addEventListener('click', ajoutJoueur);
 document.getElementById("boutonReset").addEventListener('click', (e) => {
@@ -175,5 +180,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll(".LogoSub").forEach(button => {
         button.addEventListener('click', soustraireChiffre);
     });
-    ajouterGestionToucheEntrer(); // Ajoute la gestion de la touche "Entrée" aux formulaires existants
+    initialiserFormulairesExistants(); // Initialiser les formulaires existants
 });
