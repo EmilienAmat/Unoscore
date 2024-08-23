@@ -67,9 +67,13 @@ function ajouterChiffre(event) {
     let inputNombre = joueurConcerne.querySelector('.Input');
     let scoreFinal = joueurConcerne.querySelector('.totalScore');
 
-    let score = parseInt(scoreFinal.textContent);
-    let nombreInscrit = parseInt(inputNombre.value);
+    let nombreInscrit = parseInt(inputNombre.value, 10);
+    if (isNaN(nombreInscrit) || nombreInscrit === '') {
+        alert("Veuillez entrer un nombre valide.");
+        return; // Sortir de la fonction si l'entrée n'est pas un nombre
+    }
 
+    let score = parseInt(scoreFinal.textContent, 10);
     score += nombreInscrit;
     scoreFinal.textContent = score;
     inputNombre.value = '';
@@ -82,10 +86,17 @@ function soustraireChiffre(event) {
     let inputNombre = joueurConcerne.querySelector('.Input');
     let scoreFinal = joueurConcerne.querySelector('.totalScore');
 
-    let score = parseInt(scoreFinal.textContent);
-    let nombreInscrit = parseInt(inputNombre.value);
+    let nombreInscrit = parseInt(inputNombre.value, 10);
+    if (isNaN(nombreInscrit) || nombreInscrit === '') {
+        alert("Veuillez entrer un nombre valide.");
+        return; // Sortir de la fonction si l'entrée n'est pas un nombre
+    }
 
+    let score = parseInt(scoreFinal.textContent, 10);
     score -= nombreInscrit;
+    if (score < 0) {
+        score = 0; // Empêcher le score d'être négatif
+    }
     scoreFinal.textContent = score;
     inputNombre.value = '';
 }
