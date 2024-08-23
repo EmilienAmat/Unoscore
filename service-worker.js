@@ -2,15 +2,15 @@ self.addEventListener('install', event => {
     event.waitUntil(
       caches.open('uno-score-cache').then(cache => {
         return cache.addAll([
-          '/',
-          '/index.html',
-          '/style.css',
-          '/script.js',
-          '/LOGO.png',
-          'add.png',
-          'subtract.png',
-          'settingLogo.png',
-          'resetLogo.png'
+          './',
+          './index.html',
+          './style.css',
+          './script.js',
+          './LOGO.png',
+          './add.png',
+          './subtract.png',
+          './settingLogo.png',
+          './resetLogo.png'
         ]);
       })
     );
@@ -23,4 +23,5 @@ self.addEventListener('install', event => {
       })
     );
   });
+  
   
