@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uno Score de la Famille AMATJALAL</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="image/icon-192x192.png">
+</head>
+<body>
+    <header>
+        <img src="LOGO.png" alt=""> 
+    </header>
+
+    <div id="bodyScore">
+        <div id="joueur1" class="joueurs">
+            <a href=""><img src="settingLogo.png" class="settingLogo"></a>
+            <p class="NomsJoueurs">Nom Joueur 1</p>
+            <form action="">
+                <label for="scoreInput"></label>
+                <input class="Input" type="number" placeholder="ici">
+            </form>
+            <a href=""><img src="add.png" class="LogoAdd"></a>
+            <a href=""><img src="subtract.png" class="LogoSub"></a>
+            <p class="totalScore">000</p>
+        </div>
+
+        <div id="joueur2" class="joueurs">
+            <a href=""><img src="settingLogo.png" class="settingLogo"></a>
+            <p class="NomsJoueurs">Nom Joueur 2</p>
+            <form action="">
+                <label for="scoreInput"></label>
+                <input class="Input" type="number" placeholder="ici">
+            </form>
+            <a href=""><img src="add.png" class="LogoAdd"></a>
+            <a href=""><img src="subtract.png" class="LogoSub"></a>
+            <p class="totalScore">000</p>
+        </div>
+    </div>
+
+    <hr id="traitBlanc">
+
+    <div id="addJoueur">
+        <a href=""><img src="add.png" id="boutonAjoutJoueur"></a>
+        <p>Ajouter un joueur</p>
+    </div>
+
+    <div id="reset">
+        <a href=""><img src="resetLogo.png" id="boutonReset"></a>
+    </div>
+
+    <footer>
+        <p>EMILIEN'S company ®2024 V2</p>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
