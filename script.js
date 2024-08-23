@@ -62,7 +62,7 @@ function reaffecterBoutons() {
 
 // Calculatrice pour ajouter un nombre
 function ajouterChiffre(event) {
-    event.preventDefault();
+    event.preventDefault(); // Empêche le comportement par défaut du formulaire
     let joueurConcerne = event.target.closest('.joueurs');
     let inputNombre = joueurConcerne.querySelector('.Input');
     let scoreFinal = joueurConcerne.querySelector('.totalScore');
@@ -81,7 +81,7 @@ function ajouterChiffre(event) {
 
 // Calculatrice pour soustraire un nombre
 function soustraireChiffre(event) {
-    event.preventDefault();
+    event.preventDefault(); // Empêche le comportement par défaut du formulaire
     let joueurConcerne = event.target.closest('.joueurs');
     let inputNombre = joueurConcerne.querySelector('.Input');
     let scoreFinal = joueurConcerne.querySelector('.totalScore');
@@ -132,6 +132,14 @@ function ajoutJoueur(e) {
     document.querySelectorAll(".LogoSub").forEach(button => {
         button.addEventListener('click', soustraireChiffre);
     });
+
+    // Ajouter un événement pour l'input de chaque nouveau joueur
+    noeudHTML.querySelector('.Input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Empêche la soumission du formulaire
+            ajouterChiffre(e);
+        }
+    });
 }
 
 // Attacher les événements initiaux
@@ -151,5 +159,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.querySelectorAll(".LogoSub").forEach(button => {
         button.addEventListener('click', soustraireChiffre);
+    });
+
+    // Ajouter l'événement pour les champs de saisie existants
+    document.querySelectorAll('.Input').forEach(input => {
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Empêche la soumission du formulaire
+                ajouterChiffre(e);
+            }
+        });
     });
 });
