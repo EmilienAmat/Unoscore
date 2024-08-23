@@ -13,7 +13,7 @@ const optionLogo = `
 // Fonction pour gérer les clics sur les boutons "Supprimer" et "Renommer"
 function gererOptions(event) {
     event.preventDefault();
-    event.stopPropagation(); // Ajouter cette ligne
+    event.stopPropagation();
     const bouton = event.target;
     if (bouton.classList.contains('settingLogo')) {
         bouton.insertAdjacentHTML('beforebegin', optionsHTML);
@@ -27,7 +27,7 @@ function gererOptions(event) {
 function supprimerJoueur() {
     document.getElementById("suppJoueur").addEventListener('click', (e) => {
         e.preventDefault();
-        e.stopPropagation(); // Ajouter cette ligne
+        e.stopPropagation();
         const elementParent = e.target.closest('.joueurs');
         if (elementParent) {
             elementParent.remove();
@@ -39,7 +39,7 @@ function supprimerJoueur() {
 function modifierNom() {
     document.getElementById("RenommerJoueur").addEventListener('click', (e) => {
         e.preventDefault();
-        e.stopPropagation(); // Ajouter cette ligne
+        e.stopPropagation();
         let newNom = prompt("Ajoute le nom du joueur :)");
         if (newNom) {
             const listOption = document.querySelector('.settingList');
@@ -66,7 +66,7 @@ function reaffecterBoutons() {
 // Calculatrice pour ajouter un nombre
 function ajouterChiffre(event) {
     event.preventDefault();
-    event.stopPropagation(); // Ajouter cette ligne
+    event.stopPropagation();
     let joueurConcerne = event.target.closest('.joueurs');
     let inputNombre = joueurConcerne.querySelector('.Input');
     let scoreFinal = joueurConcerne.querySelector('.totalScore');
@@ -86,7 +86,7 @@ function ajouterChiffre(event) {
 // Calculatrice pour soustraire un nombre
 function soustraireChiffre(event) {
     event.preventDefault();
-    event.stopPropagation(); // Ajouter cette ligne
+    event.stopPropagation();
     let joueurConcerne = event.target.closest('.joueurs');
     let inputNombre = joueurConcerne.querySelector('.Input');
     let scoreFinal = joueurConcerne.querySelector('.totalScore');
@@ -109,7 +109,7 @@ function soustraireChiffre(event) {
 // Ajouter un joueur
 function ajoutJoueur(e) {
     e.preventDefault();
-    e.stopPropagation(); // Ajouter cette ligne
+    e.stopPropagation();
     let joueurs = document.querySelectorAll(".joueurs");
     let nouveauJoueur = joueurs.length + 1;
     let elementParent = document.getElementById("bodyScore");
@@ -144,15 +144,16 @@ function ajoutJoueur(e) {
 // Fonction pour empêcher l'envoi du formulaire avec la touche "Entrée"
 function desactiverToucheEntrer(event) {
     if (event.key === 'Enter') {
-        event.preventDefault(); // Empêcher l'action par défaut de la touche "Entrée"
-        event.stopPropagation(); // Ajouter cette ligne
+        event.preventDefault();
+        event.stopPropagation();
     }
 }
 
 // Ajouter la gestion de la touche "Entrée" à tous les formulaires de score
 function ajouterGestionToucheEntrer() {
     document.querySelectorAll('form.formJoueur').forEach(form => {
-        form.addEventListener('keydown', desactiverToucheEntrer);
+        form.removeEventListener('keydown', desactiverToucheEntrer); // Retirer les anciens gestionnaires
+        form.addEventListener('keydown', desactiverToucheEntrer); // Ajouter le nouveau gestionnaire
     });
 }
 
@@ -165,7 +166,7 @@ function initialiserFormulairesExistants() {
 document.getElementById("boutonAjoutJoueur").addEventListener('click', ajoutJoueur);
 document.getElementById("boutonReset").addEventListener('click', (e) => {
     e.preventDefault();
-    e.stopPropagation(); // Ajouter cette ligne
+    e.stopPropagation();
     document.querySelectorAll('.totalScore').forEach(score => {
         score.textContent = "000";
     });
