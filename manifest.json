@@ -1,7 +1,7 @@
 {
     "name": "Uno Score de la Famille AMATJALAL",
     "short_name": "Uno Score",
-    "start_url": "/index.html",
+    "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#ED1C24",
     "theme_color": "#ED1C24",
@@ -18,3 +18,4 @@
         }
     ]
 }
+    
