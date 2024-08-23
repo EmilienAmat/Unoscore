@@ -17,26 +17,26 @@
 
     <div id="bodyScore">
         <div id="joueur1" class="joueurs">
-            <a href=""><img src="settingLogo.png" class="settingLogo"></a>
+            <a href="#"><img src="settingLogo.png" class="settingLogo"></a>
             <p class="NomsJoueurs">Nom Joueur 1</p>
-            <form action="">
+            <form action="#">
                 <label for="scoreInput"></label>
                 <input class="Input" type="number" placeholder="ici">
             </form>
-            <a href=""><img src="add.png" class="LogoAdd"></a>
-            <a href=""><img src="subtract.png" class="LogoSub"></a>
+            <a href="#"><img src="add.png" class="LogoAdd" alt=""></a>
+            <a href="#"><img src="subtract.png" class="LogoSub" alt=""></a>
             <p class="totalScore">000</p>
         </div>
 
         <div id="joueur2" class="joueurs">
-            <a href=""><img src="settingLogo.png" class="settingLogo"></a>
+            <a href="#"><img src="settingLogo.png" class="settingLogo" alt=""></a>
             <p class="NomsJoueurs">Nom Joueur 2</p>
-            <form action="">
+            <form action="#">
                 <label for="scoreInput"></label>
                 <input class="Input" type="number" placeholder="ici">
             </form>
-            <a href=""><img src="add.png" class="LogoAdd"></a>
-            <a href=""><img src="subtract.png" class="LogoSub"></a>
+            <a href="#"><img src="add.png" class="LogoAdd" alt=""></a>
+            <a href="#"><img src="subtract.png" class="LogoSub" alt=""></a>
             <p class="totalScore">000</p>
         </div>
     </div>
@@ -44,23 +44,23 @@
     <hr id="traitBlanc">
 
     <div id="addJoueur">
-        <a href=""><img src="add.png" id="boutonAjoutJoueur"></a>
+        <a href="#"><img src="add.png" id="boutonAjoutJoueur" alt=""></a>
         <p>Ajouter un joueur</p>
     </div>
 
     <div id="reset">
-        <a href=""><img src="resetLogo.png" id="boutonReset"></a>
+        <a href="#"><img src="resetLogo.png" id="boutonReset" alt=""></a>
     </div>
 
     <footer>
-        <p>EMILIEN'S company ®2024 V3</p>
+        <p>EMILIEN'S company ®2024 v5</p>
     </footer>
 
     <script src="script.js" defer></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                navigator.serviceWorker.register('./service-worker.js').then(function(registration) {
                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
                 }, function(err) {
                     console.log('ServiceWorker registration failed: ', err);
